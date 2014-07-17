@@ -37,7 +37,7 @@ public class PolyphonicVoice implements OnPreparedListener, OnCompletionListener
 	{
 		state = INVALID;
 		mp = new MediaPlayer();
-		mp.setDataSource(afd);
+		mp.setDataSource( afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
 		mp.setAudioStreamType(AudioManager.STREAM_MUSIC);  
 		mp.prepare();
 	}
