@@ -17,9 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.io.File;
-import java.io.FileInputStream;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -66,14 +63,13 @@ public class LowLatencyAudio extends CordovaPlugin {
 			audioID = data.getString(0);
 			if (!soundMap.containsKey(audioID)) {
 				String assetPath = data.getString(1);
-				String fullPath = assetPath;
+				String fullPath = "/data/data/com.connectai.sixtyvocab/files/" + assetPath;
 				
 				Log.d(LOGTAG, "preloadFX - " + audioID + ": " + assetPath);
 
-				//Context ctx = cordova.getActivity().getFilesDir();
-				//AssetManager am = ctx.getResources().getAssets();
-				FileInputStream stream = new FileInputStream(fullPath);
-				AssetFileDescriptor afd = stream.getFD();
+				Context ctx = cordova.getActivity().getApplicationContext();
+				AssetManager am = ctx.getResources().getAssets();
+				AssetFileDescriptor afd = am.openFd(fullPath);
 				int assetIntID = soundPool.load(afd, 1);
 				soundMap.put(audioID, assetIntID);
 			} else {
@@ -103,12 +99,10 @@ public class LowLatencyAudio extends CordovaPlugin {
 					voices = data.getInt(2);
 				}
 
-				String fullPath = assetPath;
-
-				//Context ctx = cordova.getActivity().getApplicationContext();
-				//AssetManager am = ctx.getResources().getAssets();
-				FileInputStream stream = new FileInputStream(fullPath);
-				AssetFileDescriptor afd = stream.getFD();
+				String fullPath = "/data/data/com.connectai.sixtyvocab/files/" + assetPath
+				Context ctx = cordova.getActivity().getApplicationContext();
+				AssetManager am = ctx.getResources().getAssets();
+				AssetFileDescriptor afd = am.openFd(fullPath);
 
 				LowLatencyAudioAsset asset = new LowLatencyAudioAsset(
 						afd, voices);
