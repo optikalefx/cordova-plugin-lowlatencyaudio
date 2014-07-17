@@ -75,11 +75,11 @@ public class LowLatencyAudio extends CordovaPlugin {
 				//AssetManager am = ctx.getResources().getAssets();
 				//AssetFileDescriptor afd = am.openFd(fullPath);
 				
-				File f = new File(fullPath);
-				FileInputStream fis =  new FileInputStream(f);
-				FileDescriptor afd = fis.getFD();
+				//File f = new File(fullPath);
+				//FileInputStream fis =  new FileInputStream(f);
+				//FileDescriptor afd = fis.getFD();
 				
-				int assetIntID = soundPool.load(afd, 1);
+				int assetIntID = soundPool.load(fullPath, 1);
 				soundMap.put(audioID, assetIntID);
 			} else {
 				return new PluginResult(Status.ERROR, ERROR_AUDIOID_EXISTS);
@@ -113,12 +113,12 @@ public class LowLatencyAudio extends CordovaPlugin {
 				//AssetManager am = ctx.getResources().getAssets();
 				//AssetFileDescriptor afd = am.openFd(fullPath);
 				
-				File f = new File(fullPath);
-				FileInputStream fis =  new FileInputStream(f);
-				FileDescriptor afd = fis.getFD();
+				//File f = new File(fullPath);
+				//FileInputStream fis =  new FileInputStream(f);
+				//FileDescriptor afd = fis.getFD();
 
 				LowLatencyAudioAsset asset = new LowLatencyAudioAsset(
-						afd, voices);
+						fullPath, voices);
 				assetMap.put(audioID, asset);
 
 				return new PluginResult(Status.OK);
