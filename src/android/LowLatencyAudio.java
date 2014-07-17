@@ -109,16 +109,12 @@ public class LowLatencyAudio extends CordovaPlugin {
 				}
 
 				String fullPath = assetPath;
-				//Context ctx = cordova.getActivity().getApplicationContext();
-				//AssetManager am = ctx.getResources().getAssets();
-				//AssetFileDescriptor afd = am.openFd(fullPath);
+				Context ctx = cordova.getActivity().getApplicationContext();
+				AssetManager am = ctx.getResources().getAssets();
+				AssetFileDescriptor afd = am.openFd(fullPath);
 				
-				//File f = new File(fullPath);
-				//FileInputStream fis =  new FileInputStream(f);
-				//FileDescriptor afd = fis.getFD();
-
 				LowLatencyAudioAsset asset = new LowLatencyAudioAsset(
-						fullPath, voices);
+						afd, voices);
 				assetMap.put(audioID, asset);
 
 				return new PluginResult(Status.OK);
