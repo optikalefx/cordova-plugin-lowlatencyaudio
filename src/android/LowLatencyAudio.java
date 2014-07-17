@@ -99,7 +99,7 @@ public class LowLatencyAudio extends CordovaPlugin {
 					voices = data.getInt(2);
 				}
 
-				String fullPath = "/data/data/com.connectai.sixtyvocab/files/" + assetPath
+				String fullPath = "/data/data/com.connectai.sixtyvocab/files/" + assetPath;
 				Context ctx = cordova.getActivity().getApplicationContext();
 				AssetManager am = ctx.getResources().getAssets();
 				AssetFileDescriptor afd = am.openFd(fullPath);
