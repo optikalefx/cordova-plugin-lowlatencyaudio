@@ -19,6 +19,7 @@ import java.util.HashMap;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileDescriptor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
