@@ -65,12 +65,12 @@ public class LowLatencyAudio extends CordovaPlugin {
 				String assetPath = data.getString(1);
 				String fullPath = assetPath;
 				
-				Log.d(LOGTAG, "preloadFX - " + audioID + ": " + assetPath);
+				Log.i(LOGTAG, "preloadFX - " + audioID + ": " + assetPath);
 
 				//Context ctx = cordova.getActivity().getApplicationContext();
 				//AssetManager am = ctx.getResources().getAssets();
 				//AssetFileDescriptor afd = am.openFd(fullPath);
-				int assetIntID = soundPool.load(fullPath, 1);
+				int assetIntID = soundPool.load(assetPath, 1);
 				soundMap.put(audioID, assetIntID);
 			} else {
 				return new PluginResult(Status.ERROR, ERROR_AUDIOID_EXISTS);
