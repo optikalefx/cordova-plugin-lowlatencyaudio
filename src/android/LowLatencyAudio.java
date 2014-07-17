@@ -17,10 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileDescriptor;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -71,15 +67,10 @@ public class LowLatencyAudio extends CordovaPlugin {
 				
 				Log.d(LOGTAG, "preloadFX - " + audioID + ": " + assetPath);
 
-				//Context ctx = cordova.getActivity().getApplicationContext();
-				//AssetManager am = ctx.getResources().getAssets();
-				//AssetFileDescriptor afd = am.openFd(fullPath);
-				
-				//File f = new File(fullPath);
-				//FileInputStream fis =  new FileInputStream(f);
-				//FileDescriptor afd = fis.getFD();
-				
-				int assetIntID = soundPool.load(fullPath, 1);
+				Context ctx = cordova.getActivity().getApplicationContext();
+				AssetManager am = ctx.getResources().getAssets();
+				AssetFileDescriptor afd = am.openFd(fullPath);
+				int assetIntID = soundPool.load(afd, 1);
 				soundMap.put(audioID, assetIntID);
 			} else {
 				return new PluginResult(Status.ERROR, ERROR_AUDIOID_EXISTS);
@@ -109,10 +100,11 @@ public class LowLatencyAudio extends CordovaPlugin {
 				}
 
 				String fullPath = assetPath;
+
 				Context ctx = cordova.getActivity().getApplicationContext();
 				AssetManager am = ctx.getResources().getAssets();
 				AssetFileDescriptor afd = am.openFd(fullPath);
-				
+
 				LowLatencyAudioAsset asset = new LowLatencyAudioAsset(
 						afd, voices);
 				assetMap.put(audioID, asset);
